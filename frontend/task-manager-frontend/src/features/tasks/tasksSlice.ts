@@ -16,7 +16,7 @@ interface TasksState {
 // Async thunks for task operations
 export const fetchTasks = createAsyncThunk('tasks/fetch', async () => {
   const res = await axios.get('/tasks');
-  return res.data.tasks; // Assuming response has a tasks property
+  return res.data.tasks;
 });
 
 export const createTask = createAsyncThunk('tasks/create', async (taskData: Task) => {
@@ -31,7 +31,7 @@ export const updateTask = createAsyncThunk('tasks/update', async (taskData: Task
 
 export const deleteTask = createAsyncThunk('tasks/delete', async (taskId: string) => {
   await axios.delete(`/tasks/${taskId}`);
-  return taskId; // Return taskId to be used in reducers
+  return taskId;
 });
 
 const tasksSlice = createSlice({
