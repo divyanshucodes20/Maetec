@@ -26,4 +26,3 @@ A full-stack task management application built with React (Vite) frontend, Node.
 
 ```bash
 git clone https://github.com/divyanshucodes20/Maetec
-cd task-manager
