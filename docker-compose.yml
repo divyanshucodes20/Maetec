@@ -16,6 +16,14 @@ services:
       - .:/app
       - /app/node_modules
 
+  frontend:
+    build: ./frontend
+    container_name: task_frontend
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend
+
   db:
     image: postgres:15
     container_name: task_db
