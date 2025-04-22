@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../features/auth/authSlice';
 import { AppDispatch } from '../app/store';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAppSelector } from '../hooks/use-selector';
 
 const CreateAccountPage = () => {
   const [username, setUsername] = useState('');
@@ -12,6 +13,7 @@ const CreateAccountPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const { status } = useAppSelector((state) => state.auth);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,12 +28,14 @@ const CreateAccountPage = () => {
       return;
     }
     dispatch(register({ username, password }));
-    navigate('/tasks');
-
-    setUsername('');
-    setPassword('');
-    setConfirmPassword('');
   };
+
+  // Navigate only when registration is successful
+  useEffect(() => {
+    if (status === 'succeeded') {
+      navigate('/tasks');
+    }
+  }, [status, navigate]);
 
   return (
     <div className="form-container">
@@ -60,11 +64,12 @@ const CreateAccountPage = () => {
           placeholder="Confirm Password"
           required
         />
-        <button type="submit" className="submit-button">Create Account</button>
+        <button type="submit" className="submit-button" disabled={status === 'loading'}>
+          {status === 'loading' ? 'Creating Account...' : 'Create Account'}
+        </button>
       </form>
       <p>
-        Already have an account?{' '}
-        <Link to="/login">Login here</Link>
+        Already have an account? <Link to="/login">Login here</Link>
       </p>
     </div>
   );

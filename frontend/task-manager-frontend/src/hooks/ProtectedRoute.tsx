@@ -9,8 +9,6 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ component: Component }) => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.token);
-
-  // If the user is authenticated, render the passed component; if not, redirect to login
   if (isAuthenticated) {
     return <Component />;
   } else {

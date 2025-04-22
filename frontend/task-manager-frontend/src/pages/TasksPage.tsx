@@ -4,6 +4,9 @@ import { fetchTasks, updateTask, deleteTask, createTask } from '../features/task
 import { logout } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from '../app/store';
+import styles from '../components/TaskList.module.css';
+import { toast } from 'react-toastify';
+import { useAppSelector } from '../hooks/use-selector';
 
 interface Task {
   id: string;
@@ -16,12 +19,12 @@ interface Task {
 const TasksPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { list: tasks } = useSelector((state: any) => state.tasks);
+  const { list: tasks, status: tasksStatus, error: tasksError } = useSelector((state: any) => state.tasks);
+  const authStatus = useAppSelector((state) => state.auth.status);
 
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-
   const [newTask, setNewTask] = useState<Task>({
-    id: '', 
+    id: '',
     title: '',
     description: '',
     status: 'pending',
@@ -30,6 +33,19 @@ const TasksPage = () => {
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (tasksStatus === 'failed' && tasksError) {
+      toast.error(tasksError);
+    }
+    if (tasksStatus === 'succeeded' && editingTask) {
+      toast.success('Task updated successfully!');
+    }
+    if (tasksStatus === 'succeeded' && newTask.title) {
+      toast.success('Task created successfully!');
+      setNewTask({ id: '', title: '', description: '', status: 'pending' });
+    }
+  }, [tasksStatus, tasksError, editingTask, newTask.title]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -49,6 +65,7 @@ const TasksPage = () => {
 
   const handleDelete = (taskId: string) => {
     dispatch(deleteTask(taskId));
+    toast.success('Task deleted successfully!');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -68,80 +85,94 @@ const TasksPage = () => {
   const handleCreate = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(createTask(newTask));
-    setNewTask({ id: '', title: '', description: '', status: 'pending' });
   };
-
   return (
-    <div>
-      <h1>Tasks Page</h1>
+    <div className={styles.tasksContainer}>
+      <h1 className={styles.tasksContainer}>Tasks Page</h1>
 
       {/* Create New Task Form */}
-      <form onSubmit={handleCreate}>
+      <div className={styles.createTaskForm}>
         <h2>Create Task</h2>
-        <input
-          type="text"
-          name="title"
-          value={newTask.title}
-          onChange={handleChange}
-          placeholder="Task Title"
-          required
-        />
-        <textarea
-          name="description"
-          value={newTask.description}
-          onChange={handleChange}
-          placeholder="Task Description"
-          required
-        />
-        <select
-          name="status"
-          value={newTask.status}
-          onChange={handleChange}
-          required
-        >
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-        <button type="submit">Create Task</button>
-      </form>
+        <form onSubmit={handleCreate}>
+          <input
+            type="text"
+            name="title"
+            value={newTask.title}
+            onChange={handleChange}
+            placeholder="Task Title"
+            required
+            className={styles.input}
+          />
+          <textarea
+            name="description"
+            value={newTask.description}
+            onChange={handleChange}
+            placeholder="Task Description"
+            required
+            className={styles.input}
+          />
+          <select
+            name="status"
+            value={newTask.status}
+            onChange={handleChange}
+            required
+            className={styles.select}
+          >
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+          <button type="submit" className={styles.button} disabled={tasksStatus === 'loading' || authStatus === 'loading'}>
+            {tasksStatus === 'loading' || authStatus === 'loading' ? 'Creating...' : 'Create Task'}
+          </button>
+        </form>
+      </div>
 
       {/* Render tasks list */}
-      <ul>
+      <ul className={styles.tasksList}>
         {tasks.map((task: Task) => (
-          <li key={task.id}>
+          <li key={task.id} className={styles.taskItem}>
             {editingTask?.id === task.id ? (
-              <div>
+              <div className={styles.taskDetails}>
                 <input
                   type="text"
                   name="title"
                   value={editingTask.title}
                   onChange={handleChange}
+                  className={styles.input}
                 />
                 <textarea
                   name="description"
                   value={editingTask.description}
                   onChange={handleChange}
+                  className={styles.input}
                 />
                 <select
                   name="status"
                   value={editingTask.status}
                   onChange={handleChange}
+                  className={styles.select}
                 >
                   <option value="pending">Pending</option>
                   <option value="in-progress">In Progress</option>
                   <option value="completed">Completed</option>
                 </select>
-                <button onClick={handleSave}>Save</button>
-                <button onClick={() => setEditingTask(null)}>Cancel</button>
+                <div className={styles.taskActions}>
+                  <button onClick={handleSave} disabled={tasksStatus === 'loading' || authStatus === 'loading'}>
+                    {tasksStatus === 'loading' || authStatus === 'loading' ? 'Saving...' : 'Save'}
+                  </button>
+                  <button onClick={() => setEditingTask(null)}>Cancel</button>
+                </div>
               </div>
             ) : (
-              <div>
+              <div className={styles.taskDetails}>
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>
                 <p>Status: {task.status}</p>
-                <button onClick={() => handleEdit(task)}>Edit</button>
-                <button onClick={() => handleDelete(task.id)}>Delete</button>
+                <div className={styles.taskActions}>
+                  <button onClick={() => handleEdit(task)}>Edit</button>
+                  <button onClick={() => handleDelete(task.id)}>Delete</button>
+                </div>
               </div>
             )}
           </li>
@@ -149,7 +180,9 @@ const TasksPage = () => {
       </ul>
 
       {/* Logout button */}
-      <button onClick={handleLogout} className="logout-button">Logout</button>
+      <button onClick={handleLogout} className={styles.logoutButton} disabled={authStatus === 'loading'}>
+        {authStatus === 'loading' ? 'Logging Out...' : 'Logout'}
+      </button>
     </div>
   );
 };
