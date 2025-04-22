@@ -1,0 +1,211 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f3ff, #e0e7ff);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+  }
+  
+  .logoContainer {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .logoCircle {
+    height: 4rem;
+    width: 4rem;
+    background: linear-gradient(to right, #7c3aed, #4f46e5);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .logoIcon {
+    height: 2rem;
+    width: 2rem;
+    color: white;
+  }
+  
+  .appTitle {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #111827;
+  }
+  
+  .appSubtitle {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #4b5563;
+  }
+  
+  .formContainer {
+    margin: 2rem auto 0;
+    width: 100%;
+    max-width: 28rem;
+  }
+  
+  .formCard {
+    background-color: white;
+    padding: 2rem 1rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 0.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .formCard {
+      padding: 2rem 2.5rem;
+    }
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formLabel {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
+  }
+  
+  .inputWrapper {
+    position: relative;
+    margin-top: 0.25rem;
+  }
+  
+  .inputIcon {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  
+  .formInput {
+    width: 100%;
+    padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    font-size: 0.875rem;
+  }
+  
+  .formInput:focus {
+    outline: none;
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  }
+  
+  .formInput::placeholder {
+    color: #9ca3af;
+  }
+  
+  .submitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    background: linear-gradient(to right, #7c3aed, #4f46e5);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .submitButton:hover {
+    background: linear-gradient(to right, #6d28d9, #4338ca);
+  }
+  
+  .submitButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  }
+  
+  .submitButton:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+  
+  .buttonIcon {
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
+  }
+  
+  .divider {
+    position: relative;
+    margin-top: 1.5rem;
+  }
+  
+  .dividerLine {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .dividerText {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .dividerTextInner {
+    padding: 0 0.5rem;
+    background-color: white;
+  }
+  
+  .alternateAction {
+    margin-top: 1.5rem;
+  }
+  
+  .alternateButton {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .alternateButton:hover {
+    background-color: #f9fafb;
+  }
+  
+  .alternateButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  }
+  

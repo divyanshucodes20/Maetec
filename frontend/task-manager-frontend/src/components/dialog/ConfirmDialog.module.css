@@ -1,0 +1,120 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+  
+  .dialog {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 28rem;
+    margin: 0 1rem;
+    overflow: hidden;
+  }
+  
+  .dialogHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #dc2626;
+    color: white;
+    padding: 1rem 1.5rem;
+  }
+  
+  .dialogTitle {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+  
+  .closeButton {
+    color: white;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .closeButton:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .closeIcon {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  
+  .dialogContent {
+    padding: 1.5rem;
+  }
+  
+  .messageContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .warningIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #dc2626;
+  }
+  
+  .message {
+    color: #4b5563;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .cancelButton {
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .cancelButton:hover {
+    background-color: #f9fafb;
+  }
+  
+  .cancelButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+  }
+  
+  .confirmButton {
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    background-color: #dc2626;
+    cursor: pointer;
+  }
+  
+  .confirmButton:hover {
+    background-color: #b91c1c;
+  }
+  
+  .confirmButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+  }
+  

@@ -1,0 +1,147 @@
+.container {
+    min-height: 100vh;
+    background-color: #f9fafb;
+  }
+  
+  .content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .pageTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  
+  .addButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #7c3aed;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s;
+  }
+  
+  .addButton:hover {
+    background-color: #6d28d9;
+  }
+  
+  .addButton:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+  }
+  
+  .addIcon {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  
+  .loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16rem;
+  }
+  
+  .spinner {
+    border: 2px solid rgba(124, 58, 237, 0.1);
+    border-top-color: #7c3aed;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .boardContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .boardContainer {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .column {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 1rem;
+  }
+  
+  .columnPending {
+    border-top: 4px solid #f59e0b;
+  }
+  
+  .columnInProgress {
+    border-top: 4px solid #3b82f6;
+  }
+  
+  .columnCompleted {
+    border-top: 4px solid #10b981;
+  }
+  
+  .columnHeader {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .statusDot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 9999px;
+    margin-right: 0.5rem;
+  }
+  
+  .dotPending {
+    background-color: #f59e0b;
+  }
+  
+  .dotInProgress {
+    background-color: #3b82f6;
+  }
+  
+  .dotCompleted {
+    background-color: #10b981;
+  }
+  
+  .tasksList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .emptyMessage {
+    color: #6b7280;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
